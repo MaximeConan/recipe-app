@@ -6,15 +6,24 @@ const Card = ({ details }) => {
     .split(',')
     .map(item => <li key={item}>{item}</li>)
 
-  // Création d'un tableau pour nos instructions, chaque ingrédient doit être séparé par un point et sera alors intégré dans un li
+  // Création d'un tableau pour nos instructions, chaque ingrédient doit être séparé par un retour à la ligne et sera alors intégré dans un li
   const instructions = details.instructions
-    .split('.')
+    .split('\n')
     .map(item => <li key={item}>{item}</li>)
+
+  // Gestion de l'image par défaut
+  const requireImage = chemin => {
+    try {
+      return require(`../img/${chemin}`)
+    } catch (err) {
+      return require(`../img/default.jpeg`)
+    }
+  }
 
   return (
     <div className='card'>
       <div className='image'>
-        <img src={require(`../img/${details.image}`)} alt={details.nom} />
+        <img src={requireImage(details.image)} alt={details.nom} />
       </div>
       <div className='recette'>
         <h2>{details.nom}</h2>
