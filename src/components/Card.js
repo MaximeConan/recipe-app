@@ -1,17 +1,14 @@
 import React from 'react'
 
-const Card = ({ details }) => {
-  // Création d'un tableau pour nos ingrédients, chaque ingrédient doit être séparé par une virgule et sera alors intégré dans un li
+const Card = ({ details, antho }) => {
   const ingredients = details.ingredients
     .split(',')
     .map(item => <li key={item}>{item}</li>)
 
-  // Création d'un tableau pour nos instructions, chaque ingrédient doit être séparé par un retour à la ligne et sera alors intégré dans un li
   const instructions = details.instructions
     .split('\n')
     .map(item => <li key={item}>{item}</li>)
 
-  // Gestion de l'image par défaut
   const requireImage = chemin => {
     try {
       return require(`../img/${chemin}`)
@@ -34,6 +31,7 @@ const Card = ({ details }) => {
           {instructions}
         </ol>
       </div>
+      <p>{antho}</p>
     </div>
   )
 }
